@@ -25,6 +25,7 @@ class AnimatedImageList extends StatelessWidget {
   final EdgeInsetsGeometry paddingOfImage;
   final BorderRadiusGeometry? borderRadiusImage;
   final double elevation;
+  final Function(int)? onItemChanged;
 
   /// builder for snapping effect list with two static sizes
   /// [scrollDirection] scroll direction for list horizontal or isVertical
@@ -48,12 +49,14 @@ class AnimatedImageList extends StatelessWidget {
     this.paddingOfImage = const EdgeInsets.all(0),
     this.borderRadiusImage,
     this.elevation = 0.0,
+    this.onItemChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: SnappingListView.builder(
+        onItemChanged: onItemChanged,
         itemBuilder: (context, index, progress, maxSize) {
           // print(maxHeight);
           String photo = images[index];
