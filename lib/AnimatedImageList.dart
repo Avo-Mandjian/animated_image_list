@@ -24,6 +24,7 @@ class AnimatedImageList extends StatelessWidget {
   final double maxExtent;
   final EdgeInsetsGeometry paddingOfImage;
   final BorderRadiusGeometry? borderRadiusImage;
+  final double elevation;
 
   /// builder for snapping effect list with two static sizes
   /// [scrollDirection] scroll direction for list horizontal or isVertical
@@ -46,6 +47,7 @@ class AnimatedImageList extends StatelessWidget {
     this.maxExtent = 400,
     this.paddingOfImage = const EdgeInsets.all(0),
     this.borderRadiusImage,
+    this.elevation = 0.0,
   }) : super(key: key);
 
   @override
@@ -64,7 +66,7 @@ class AnimatedImageList extends StatelessWidget {
                   tag: "$photo-$index",
                   child: Material(
                       color: Colors.transparent,
-                      elevation: 10,
+                      elevation: elevation,
                       clipBehavior: Clip.antiAlias,
                       borderRadius: borderRadiusImage,
                       child: InkWell(
