@@ -1,13 +1,14 @@
 library animated_image_list;
 
-import 'dart:ui';
+import "dart:math";
+
+import 'package:flutter/material.dart';
+
 import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_page.dart';
 import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
 import 'package:animated_image_list/photoViewerArbnb/TransparentRoute.dart';
 import 'package:animated_image_list/photoViewerArbnb/transparent_image.dart';
-import 'package:flutter/material.dart';
-import "package:flutter/widgets.dart";
-import "dart:math";
+
 import 'SnappingListView.dart';
 
 typedef ItemBuilder = Widget Function(
@@ -21,6 +22,8 @@ class AnimatedImageList extends StatelessWidget {
   final Axis scrollDirection;
   final double itemExtent;
   final double maxExtent;
+  final EdgeInsetsGeometry paddingOfImage;
+  final BorderRadiusGeometry? borderRadiusImage;
 
   /// builder for snapping effect list with two static sizes
   /// [scrollDirection] scroll direction for list horizontal or isVertical
@@ -32,16 +35,18 @@ class AnimatedImageList extends StatelessWidget {
   /// [builder] builder function for each item
   /// [placeHolder] 	Optional function which returns default placeholder
   /// for lightbox and error widget if image fails to load
-  const AnimatedImageList(
-      {Key? key,
-      required this.images,
-      this.provider,
-      this.placeHolder,
-      this.builder,
-      this.itemExtent = 150,
-      this.maxExtent = 400,
-      this.scrollDirection = Axis.vertical})
-      : super(key: key);
+  const AnimatedImageList({
+    Key? key,
+    required this.images,
+    this.provider,
+    this.placeHolder,
+    this.builder,
+    this.scrollDirection = Axis.vertical,
+    this.itemExtent = 150,
+    this.maxExtent = 400,
+    this.paddingOfImage = const EdgeInsets.all(5),
+    this.borderRadiusImage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +59,14 @@ class AnimatedImageList extends StatelessWidget {
           double translate =
               progress > 1 ? max(maxSize * (progress - 1.0), 0.0) : 0.0;
           return Padding(
-              padding: const EdgeInsets.all(5),
+              padding: paddingOfImage,
               child: Hero(
                   tag: "$photo-$index",
                   child: Material(
                       color: Colors.transparent,
                       elevation: 10,
                       clipBehavior: Clip.antiAlias,
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: borderRadiusImage,
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).push(TransparentRoute(
