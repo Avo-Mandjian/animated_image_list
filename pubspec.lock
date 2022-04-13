@@ -66,7 +66,7 @@ packages:
       name: gesture_x_detector
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-nullsafety.1"
+    version: "1.0.0"
   matcher:
     dependency: transitive
     description:

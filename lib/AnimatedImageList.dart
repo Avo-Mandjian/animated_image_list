@@ -26,6 +26,7 @@ class AnimatedImageList extends StatelessWidget {
   final BorderRadiusGeometry? borderRadiusImage;
   final double elevation;
   final Function(int)? onItemChanged;
+  final Widget imageLoader;
 
   /// builder for snapping effect list with two static sizes
   /// [scrollDirection] scroll direction for list horizontal or isVertical
@@ -50,6 +51,9 @@ class AnimatedImageList extends StatelessWidget {
     this.borderRadiusImage,
     this.elevation = 0.0,
     this.onItemChanged,
+    this.imageLoader = const Center(
+      child: CircularProgressIndicator(),
+    ),
   }) : super(key: key);
 
   @override
@@ -108,20 +112,7 @@ class AnimatedImageList extends StatelessWidget {
                                               loadingBuilder:
                                                   (context, image, progress) {
                                                 if (progress != null)
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      height: maxSize / 3,
-                                                      width: maxSize / 3,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        value: (progress
-                                                                .cumulativeBytesLoaded) /
-                                                            (progress
-                                                                    .expectedTotalBytes ??
-                                                                1.0),
-                                                      ),
-                                                    ),
-                                                  );
+                                                  return imageLoader;
                                                 return image;
                                               },
                                               errorBuilder:
