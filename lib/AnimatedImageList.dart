@@ -44,7 +44,7 @@ class AnimatedImageList extends StatelessWidget {
     this.scrollDirection = Axis.vertical,
     this.itemExtent = 150,
     this.maxExtent = 400,
-    this.paddingOfImage = const EdgeInsets.all(5),
+    this.paddingOfImage = const EdgeInsets.all(0),
     this.borderRadiusImage,
   }) : super(key: key);
 
